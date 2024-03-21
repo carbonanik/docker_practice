@@ -1,0 +1,22 @@
+version: "3.9"  # Adjust if needed for your Docker version
+
+services:
+  redis:
+    image: redis:latest  # Use a specific version if required
+    ports:
+      - "6379:6379"  # Map container port 6379 to host port 6379 (default Redis port)
+    volumes:
+      - redis-data:/data  # Optional: Persist Redis data
+
+  redis-insight:
+    image: redis/redis-stack  # Includes both Redis server and RedisInsight
+    ports:
+      - "8081:8081"  # Map container port 8081 to host port 8081 (default RedisInsight port)
+    depends_on:
+      - redis  # Ensure Redis starts before RedisInsight
+    environment:
+      REDIS_HOST: redis  # Connect RedisInsight to the internal "redis" service
+      REDIS_PORT: 6379   # Default Redis port
+
+volumes:
+  redis-data:  # Optional: Create a named volume for persistent Redis data
