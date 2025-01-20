@@ -1,28 +1,28 @@
-version: '3.8'
+#Official format for server
+#First create a network
+#Then create a volume
+#Then create the service 
+#using portainer
 
 services:
-  pg:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4
+  postgres:
+    image: postgres #17.2 # Or your preferred version
+    container_name: postgres
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: password
-    ports:
-      - "5555:80"
-    links:
-      - pg
+      POSTGRES_PASSWORD: alwArYwENCIL
     volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
-
+      - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d/ # If you have initialization scripts
+    # ports:
+      # - "5432:5432"
+    networks:
+      - npm_net
 
 volumes:
-  pg_data:
-  pgadmin_data:
+  postgres_data:
+    external: true
+
+networks:
+  npm_net:
+    external: true

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: alwArYwENCIL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    networks:
+      - npm_net
+
+  cloudbeaver-ee:
+    image: 'dbeaver/cloudbeaver:ea'
+    volumes:
+      - /opt/cloudbeaver/workspace
+    ports:
+      - '8978:8978'
+    stdin_open: true
+    tty: true
+    container_name: cloudbeaver-ee
+    networks:
+      - npm_net
+
+volumes:
+  postgres_data:
+
+
+networks:
+  npm_net:

@@ -1,0 +1,31 @@
+#Official format for server
+#First create a network
+#Then create a volume
+#Then create the service 
+#using portainer
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    volumes:
+      - minio_data:/data
+    # ports:
+      # - 9000:9000
+      # - 9001:9001
+    environment:
+      MINIO_ROOT_USER: 'admin'
+      MINIO_ROOT_PASSWORD: 'ANTriGintICi'
+      MINIO_ADDRESS: ':9000'
+      MINIO_CONSOLE_ADDRESS: ':9001'
+    command: minio server /data
+    networks:
+      - npm_net
+
+volumes:
+  minio_data:
+    external: true
+
+networks:
+  npm_net:
+    external: true
