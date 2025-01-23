@@ -16,3 +16,4 @@
       file:
         path: /tmp/docker-compose.yml
         state: absent
+# Working Model
