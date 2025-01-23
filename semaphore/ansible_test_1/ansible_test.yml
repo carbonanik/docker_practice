@@ -1,6 +1,6 @@
 ---
 - name: Run a bash script on a remote server
-  hosts: target_server
+  hosts: web_servers
   become: yes
   tasks:
     - name: Copy bash script to the server
