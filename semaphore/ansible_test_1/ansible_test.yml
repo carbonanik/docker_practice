@@ -7,7 +7,7 @@
       copy:
         content: |
           #!/bin/bash
-          echo "$(date)" >> /path/to/your/file.txt
+          echo "$(date)" >> /root/file.txt
         dest: /tmp/append_time.sh
         mode: '0755'
 
