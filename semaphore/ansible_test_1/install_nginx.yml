@@ -3,16 +3,10 @@
   hosts: web_servers
   become: yes
   tasks:
-    - name: Copy docker-compose.yml to the server
-      copy:
-        src: nginx/docker-compose.yml
-        dest: /tmp/docker-compose.yml
-        mode: '0755'
 
-    - name: Execute docker-compose.yml
-      shell: docker compose -f /tmp/docker-compose.yml up -d
-
-    - name: Cleanup the docker-compose.yml
-      file:
-        path: /tmp/docker-compose.yml
-        state: absent
+    - name: Deploy nginx
+      community.docker.docker_container:
+      name: test_nginx
+      image: nginx:latest
+      ports:
+        - '8181:80'
