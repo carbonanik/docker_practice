@@ -5,5 +5,7 @@
   tasks:
     - name: Create and start services
       community.docker.docker_compose_v2:
-        project_src: nginx
+        # Specify the path to the docker-compose.yml file
+        # the path is relative to the playbook use pwd
+        project_src: "{{ playbook_dir }}/nginx/docker-compose.yml"
       register: output
