@@ -3,9 +3,18 @@
   hosts: web_servers
   become: yes
   tasks:
+    - name: Copy docker-compose.yml to the server
+      copy:
+        src: nginx/docker-compose.yml
+        dest: /tmp/docker-compose.yml
+        mode: '0755'
+
     - name: Create and start services
       community.docker.docker_compose_v2:
-        # Specify the path to the docker-compose.yml file
-        # the path is relative to the playbook use pwd
-        project_src: "{{ playbook_dir }}/nginx"
+        project_src: "/tmp/docker-compose.yml"
       register: output
+
+    - name: Cleanup the docker-compose.yml
+      file:
+        path: /tmp/docker-compose.yml
+        state: absent
