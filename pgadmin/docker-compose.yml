@@ -11,7 +11,7 @@ services:
     container_name: pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@mail.com
-      PGADMIN_DEFAULT_PASSWORD: CEnGLADOxhud
+      PGADMIN_DEFAULT_PASSWORD: password
       PGADMIN_CONFIG_SERVER_MODE: 'False' # Important for Docker
     # ports:
       # - "8080:80"

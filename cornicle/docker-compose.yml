@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+    cronicle:
+        image: soulteary/cronicle
+        container_name: cronicle
+        hostname: cronicle
+        ports:
+            - '3012:3012'
+        # volumes:
+        #     - '`pwd`/data/plugins:/opt/cronicle/plugins:rw'
+        #     - '`pwd`/data/logs:/opt/cronicle/logs:rw'
+        #     - '`pwd`/data/data:/opt/cronicle/data:rw'
+        #     - '/etc/timezone:/etc/timezone:ro'
+        #     - '/etc/localtime:/etc/localtime:ro'

@@ -1,0 +1,14 @@
+services:
+  # Your other services.
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: gotenberg
+    ports:
+      - 3000:3000
+    networks:
+      - npm_net
+
+networks:
+  npm_net:
+    external: true

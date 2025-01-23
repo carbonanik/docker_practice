@@ -1,0 +1,18 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    ports:
+      - 8095:80
+    volumes:
+      - './database.db:/database.db' 
+      - './.filebrowser.json:/.filebrowser.json'
+      - '/root:/srv'
+    environment:
+      - PUID=$(id -u)
+      - PGID=$(id -g)
+    networks:
+      - npm_net
+
+networks:
+  npm_net:
+    external: true

@@ -10,7 +10,7 @@ services:
     image: postgres #17.2 # Or your preferred version
     container_name: postgres
     environment:
-      POSTGRES_PASSWORD: alwArYwENCIL
+      POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d/ # If you have initialization scripts

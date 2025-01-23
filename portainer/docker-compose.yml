@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  portainer-ce:
+    image: 'portainer/portainer-ce:2.21.5'
+    volumes:
+      - 'portainer_data:/data'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    restart: unless-stopped
+    container_name: portainer
+    ports:
+      - '9443:9443'
+      - '8000:8000'
+      - '9000:9000'
+    networks:
+      - npm_net
+
+volumes:
+  portainer_data:
+    external: true
+
+networks:
+  npm_net:
+    external: true
