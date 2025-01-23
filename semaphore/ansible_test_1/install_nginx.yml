@@ -3,18 +3,18 @@
   hosts: web_servers
   become: yes
   tasks:
-    - name: Copy docker-compose.yml to the server
+    - name: Copy proj to the server
       copy:
-        src: nginx/docker-compose.yml
-        dest: /tmp/docker-compose.yml
+        src: test_proj
+        dest: /tmp/test_proj
         mode: '0755'
 
     - name: Create and start services
       community.docker.docker_compose_v2:
-        project_src: "/tmp/docker-compose.yml"
+        project_src: "/tmp/test_proj"
       register: output
 
-    - name: Cleanup the docker-compose.yml
+    - name: Cleanup the proj
       file:
-        path: /tmp/docker-compose.yml
+        path: /tmp/test_proj
         state: absent
