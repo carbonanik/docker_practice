@@ -5,7 +5,7 @@
   tasks:
     - name: Copy docker-compose.yml to the server
       copy:
-        src: ./nginx/docker-compose.yml
+        src: nginx/docker-compose.yml
         dest: /tmp/docker-compose.yml
         mode: '0755'
 
