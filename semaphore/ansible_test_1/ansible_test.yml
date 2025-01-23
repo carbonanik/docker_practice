@@ -1,0 +1,22 @@
+---
+- name: Run a bash script on a remote server
+  hosts: target_server
+  become: yes
+  tasks:
+    - name: Copy bash script to the server
+      copy:
+        content: |
+          #!/bin/bash
+          echo "$(date)" >> /path/to/your/file.txt
+        dest: /tmp/append_time.sh
+        mode: '0755'
+
+    - name: Execute the bash script
+      shell: /tmp/append_time.sh
+
+    - name: Cleanup the bash script
+      file:
+        path: /tmp/append_time.sh
+        state: absent
+
+# Inventory File (inventory.ini)
