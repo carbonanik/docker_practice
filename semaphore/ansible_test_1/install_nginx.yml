@@ -6,7 +6,7 @@
     - name: Copy proj to the server
       copy:
         src: test_proj
-        dest: /tmp/test_proj
+        dest: /tmp
         mode: '0755'
 
     - name: Create and start services
