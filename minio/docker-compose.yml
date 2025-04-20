@@ -6,25 +6,26 @@
 
 services:
   minio:
-    image: minio/minio
+    image: minio/minio:RELEASE.2025-01-20T14-49-07Z-cpuv1
     container_name: minio
     volumes:
       - minio_data:/data
-    # ports:
-      # - 9000:9000
-      # - 9001:9001
+    ports:
+      - 9000:9000
+      - 9001:9001
     environment:
       MINIO_ROOT_USER: 'admin'
       MINIO_ROOT_PASSWORD: 'password'
       MINIO_ADDRESS: ':9000'
       MINIO_CONSOLE_ADDRESS: ':9001'
+    restart: unless-stopped
     command: minio server /data
     networks:
       - npm_net
 
 volumes:
   minio_data:
-    external: true
+    # external: true
 
 networks:
   npm_net:

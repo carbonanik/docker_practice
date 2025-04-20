@@ -1,0 +1,29 @@
+services:
+  memcached:
+    image: memcached:1.6.34
+    container_name: memcached
+    ports:
+      - "11211:11211"
+    networks:
+      - cache
+    restart: unless-stopped
+
+  phpcacheadmin:
+    image: robinn/phpcacheadmin:1.6.3
+    ports:
+      - "8086:80"
+    #volumes:
+    # If you want to use config.php instead of ENV variables
+    #  - "./config.php:/var/www/html/config.php"
+    environment:
+      - PCA_MEMCACHED_0_HOST=memcached
+      - PCA_MEMCACHED_0_PORT=11211
+    networks:
+      - cache
+    depends_on:
+      - memcached
+    links:
+      - memcached
+
+networks:
+  cache:

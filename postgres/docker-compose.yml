@@ -7,20 +7,37 @@
 services:
 
   postgres:
-    image: postgres #17.2 # Or your preferred version
+    image: postgres:17.2
     container_name: postgres
     environment:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d/ # If you have initialization scripts
-    # ports:
-      # - "5432:5432"
+    ports:
+      - "5432:5432"
+    networks:
+      - npm_net
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:8.14
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_CONFIG_SERVER_MODE: 'False' # Important for Docker
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
     networks:
       - npm_net
 
 volumes:
   postgres_data:
+    external: true
+  pgadmin_data:
     external: true
 
 networks:
